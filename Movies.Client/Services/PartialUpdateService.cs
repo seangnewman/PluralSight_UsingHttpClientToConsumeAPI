@@ -33,7 +33,7 @@ namespace Movies.Client.Services
             patchDoc.Replace(m => m.Title, "Updated Title");
             patchDoc.Remove(m => m.Description);
 
-            //var serializedChangeSet = JsonConvert.SerializeObject(patchDoc);
+            var serializedChangeSet = JsonConvert.SerializeObject(patchDoc);
 
             var request = new HttpRequestMessage(HttpMethod.Patch, "api/movies/5b1c2b4d-48c7-402a-80c3-cc796ad49c6b");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -45,7 +45,7 @@ namespace Movies.Client.Services
 
             // **** Shortcut  -- limited due to headers not defined
             // var response = await _httpClient.PatchAsync("api/movies/5b1c2b4d-48c7-402a-80c3-cc796ad49c6b",
-            new StringContent(JsonConvert.SerializeObject(patchDoc), Encoding.UTF8, "application/json-patch+json"));
+            new StringContent(JsonConvert.SerializeObject(patchDoc), Encoding.UTF8, "application/json-patch+json");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
