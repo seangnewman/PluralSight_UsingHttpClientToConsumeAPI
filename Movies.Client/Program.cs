@@ -44,9 +44,13 @@ namespace Movies.Client
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
             // add loggers           
-            serviceCollection.AddSingleton(new LoggerFactory()
-                  .AddConsole()
-                  .AddDebug());
+            
+            using (var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole()))
+            {
+                // use loggerFactory
+              
+
+            }
 
             serviceCollection.AddLogging();
 
@@ -54,10 +58,10 @@ namespace Movies.Client
             // scoped lifetime
 
             // For the CRUD demos
-            serviceCollection.AddScoped<IIntegrationService, CRUDService>();
+            //serviceCollection.AddScoped<IIntegrationService, CRUDService>();
 
             // For the partial update demos
-            // serviceCollection.AddScoped<IIntegrationService, PartialUpdateService>();
+             serviceCollection.AddScoped<IIntegrationService, PartialUpdateService>();
 
             // For the stream demos
             // serviceCollection.AddScoped<IIntegrationService, StreamService>();
